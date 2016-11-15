@@ -57,6 +57,7 @@ function Raven() {
     this._keypressTimeout;
     this._location = _window.location;
     this._lastHref = this._location && this._location.href;
+    this._sentErrors = 0;
 
     for (var method in this._originalConsole) {  // eslint-disable-line guard-for-in
       this._originalConsoleMethods[method] = this._originalConsole[method];
@@ -770,6 +771,9 @@ Raven.prototype = {
         var parsedTo = parseUrl(to);
         var parsedFrom = parseUrl(from);
 
+        //refresh max error count
+        this._sentErrors = 0;
+
         // because onpopstate only tells you the "new" (to) value of location.href, and
         // not the previous (from) value, we need to track the value of the current URL
         // state ourselves
@@ -1058,6 +1062,9 @@ Raven.prototype = {
                 // params to preserve 0 arity
                 return function (/* state, title, url */) {
                     var url = arguments.length > 2 ? arguments[2] : undefined;
+
+                    //refresh max error count
+                    self._sentErrors = 0;
 
                     // url argument is optional
                     if (url) {
@@ -1352,7 +1359,12 @@ Raven.prototype = {
         if (isFunction(globalOptions.shouldSendCallback) && !globalOptions.shouldSendCallback(data)) {
             return;
         }
+        //Check if the request should be filtered due to errors per page
+        if (globalOptions.maxErrors && this._sentErrors >= globalOptions.maxErrors){
+           return;
+        }
 
+        this._sentErrors++; //failed errors count towards maxErrors
         this._sendProcessedPayload(data);
     },
 

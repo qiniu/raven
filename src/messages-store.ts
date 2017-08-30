@@ -26,10 +26,6 @@ export class MessagesStore {
     this.parent = parent
   }
 
-  get transfers() {
-    return this.parent.transfers
-  }
-
   add(data: ISourceMessage) {
     const message: IMessage = {
       id: ++this.counter,
@@ -39,7 +35,7 @@ export class MessagesStore {
 
     this.store.push(message)
 
-    this.transfers.forEach((transfer) => transfer.send(message))
+    this.parent.transfers.forEach((transfer) => transfer.send(message))
 
     if (isBreadcrumb(data.category)) {
       this.parent.getCallback('breadcrumb')(data)

@@ -26,7 +26,7 @@ import UIEventSource from './sources/ui-event'
 import ExpectionSource from './sources/exception'
 
 // Logger
-import logger from './logger'
+import logger, { ILogger } from './logger'
 
 import {
   hasKey, merge, clone,
@@ -74,7 +74,7 @@ const DEFAULT_RAVEN_OPTION: IRavenOption = {
   }
 }
 
-type ValueCallback<T> = (value?: T, callback?: ValueCallback<T>) => T
+export type ValueCallback<T> = (value?: T, callback?: ValueCallback<T>) => T
 
 export class Raven {
 

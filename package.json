@@ -14,9 +14,12 @@
   },
   "main": "src/singleton.js",
   "dependencies": {
-    "json-stringify-safe": "^5.0.1"
+    "tracekit": "^0.4.5"
   },
   "devDependencies": {
+    "@types/node": "^8.0.24",
+    "ava": "^0.22.0",
+    "awesome-typescript-loader": "^3.2.3",
     "bluebird": "^3.4.1",
     "browserify-versionify": "^1.0.6",
     "bundle-collapser": "^1.2.1",
@@ -38,13 +41,16 @@
     "grunt-release": "^0.13.0",
     "grunt-s3": "0.2.0-alpha.3",
     "grunt-sri": "mattrobenolt/grunt-sri#pretty",
+    "html-webpack-plugin": "^2.30.1",
     "jquery": "^2.1.4",
-    "lodash": "^3.10.1",
     "mocha": "2.5.3",
     "proxyquireify": "^3.0.2",
     "sinon": "1.7.3",
+    "source-map-loader": "^0.2.1",
     "through2": "^2.0.0",
-    "typescript": "^1.8.10",
+    "typescript": "^2.4.2",
+    "webpack": "^3.5.5",
+    "webpack-bundle-analyzer": "^2.9.0",
     "whatwg-fetch": "^1.0.0"
   },
   "keywords": [

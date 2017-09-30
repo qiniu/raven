@@ -1,5 +1,5 @@
 {
-  "name": "raven",
+  "name": "@qiniu/raven",
   "version": "3.13.1",
   "license": "MIT",
   "homepage": "https://github.com/getsentry/raven-js",
@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git://github.com/getsentry/raven-js.git"
   },
-  "main": "dist/raven.js",
+  "main": "lib/raven.js",
   "devDependencies": {
     "tracekit": "^0.4.5",
     "@types/node": "^8.0.24",

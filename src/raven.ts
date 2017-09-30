@@ -173,6 +173,11 @@ export class Raven {
     // Instrument TryCatch
     if (this.option.instrument && this.option.instrument['tryCatch']) {
       this.addSource(ExpectionSource())
+      if (_window) {
+        _window.onerror = (msg, source, line, col, err) => {
+          this.captureException(err)
+        }
+      }
     }
 
     // Instrumeny Breadcrumb

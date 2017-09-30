@@ -49,6 +49,10 @@ function domEventHandler(evtName: string, action: ActionFunc<ISourceMessage>) {
       }
     }
 
+    if (evtName === 'input') {
+      payload.value = evt.target.value
+    }
+
     action({
       category: 'ui.events',
       payload

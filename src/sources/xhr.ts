@@ -68,7 +68,7 @@ export default (raven: Raven) => {
               } catch (e) { /* do nothing */ }
 
               action({
-                category: 'netword',
+                category: 'network',
                 payload: xhr.__raven_xhr
               })
             }

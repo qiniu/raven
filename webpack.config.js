@@ -10,9 +10,9 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist',
-    library: 'raven',
-    libraryTarget: 'umd'
+    path: __dirname + '/lib',
+    library: '[name]',
+    libraryTarget: 'this'
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -33,11 +33,5 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        comments: false
-      }
-    })
-  ]
+  plugins: []
 }

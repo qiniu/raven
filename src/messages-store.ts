@@ -1,6 +1,7 @@
 import { CollectionStore } from './store'
 import { ISourceMessage } from './source'
 import { Raven } from './raven'
+import { _window } from './detection'
 
 import logger from './logger'
 
@@ -27,6 +28,11 @@ export class MessagesStore {
   }
 
   add(data: ISourceMessage) {
+
+    if (_window && _window.location && _window.location.href) {
+      data.url = _window.location.href
+    }
+
     const message: IMessage = {
       id: ++this.counter,
       data,

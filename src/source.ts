@@ -2,6 +2,7 @@ import { merge } from './utils'
 
 export type SourceMessageType = 'message' | 'error'
 export interface ISourceMessage {
+  url?: string
   type?: SourceMessageType
   category: string
   payload: any

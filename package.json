@@ -1,6 +1,6 @@
 {
   "name": "@qiniu/raven",
-  "version": "3.13.1",
+  "version": "3.13.3",
   "license": "MIT",
   "homepage": "https://github.com/getsentry/raven-js",
   "repository": {

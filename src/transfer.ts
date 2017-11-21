@@ -2,7 +2,8 @@ import { Store } from './store'
 import { IMessage } from './messages-store'
 import { ISourceMessage } from './source'
 
-export type TransferFunc = (data?: any) => Promise<any>
+export type Callback = (error?: Error, reason?: any) => void
+export type TransferFunc = (data?: any, callback?: Callback) => void
 
 export default class Transfer {
 
@@ -40,15 +41,16 @@ export default class Transfer {
 
   send(message: IMessage) {
     const { data, sent } = message
-    this.queue.push(() => new Promise((resolve, reject) => {
+    this.queue.push((callback: Callback) => {
+      this.transfer.call(this, this.extendMessage(data), (err: Error) => {
+        if (err) {
+          return callback(err)
+        }
 
-      this.transfer.call(this, this.extendMessage(data))
-        .then(() => {
-          message.sent = true
-        })
-        .then(resolve)
-        .catch(reject)
-    }))
+        message.sent = true
+        callback()
+      })
+    })
 
     if (!this.running) {
       this.run()
@@ -85,8 +87,7 @@ export default class Transfer {
     if (current) {
       this.running = true
 
-      current()
-        .then(() => this.run())
+      current(() => this.run())
     } else {
       this.running = false
     }

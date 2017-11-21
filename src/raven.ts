@@ -173,6 +173,11 @@ export class Raven {
     // Instrument TryCatch
     if (this.option.instrument && this.option.instrument['tryCatch']) {
       this.addSource(ExpectionSource())
+      if (_window) {
+        _window.onerror = (msg, source, line, col, err) => {
+          this.captureException(err)
+        }
+      }
     }
 
     // Instrumeny Breadcrumb
@@ -671,19 +676,35 @@ export class Raven {
   }
 
   _setupBreadcrumb() {
-    if (this.option.autoBreadcrumbs['xhr'] || this.option.autoBreadcrumbs === true) {
+    if (
+      this.option.autoBreadcrumbs === true ||
+      (!!this.option.autoBreadcrumbs && typeof this.option.autoBreadcrumbs['xhr'] === 'undefined') ||
+      this.option.autoBreadcrumbs['xhr'] === true
+    ) {
       this.addSource(XHRSource(this))
     }
 
-    if (this.option.autoBreadcrumbs['history'] || this.option.autoBreadcrumbs === true) {
+    if (
+      this.option.autoBreadcrumbs === true ||
+      (!!this.option.autoBreadcrumbs && typeof this.option.autoBreadcrumbs['history'] === 'undefined') ||
+      this.option.autoBreadcrumbs['history'] === true
+    ) {
       this.addSource(HistorySource(this))
     }
 
-    if (this.option.autoBreadcrumbs['dom'] || this.option.autoBreadcrumbs === true) {
+    if (
+      this.option.autoBreadcrumbs === true ||
+      (!!this.option.autoBreadcrumbs && typeof this.option.autoBreadcrumbs['dom'] === 'undefined') ||
+      this.option.autoBreadcrumbs['dom'] === true
+    ) {
       this.addSource(UIEventSource())
     }
 
-    if (this.option.autoBreadcrumbs['console'] || this.option.autoBreadcrumbs === true) {
+    if (
+      this.option.autoBreadcrumbs === true ||
+      (!!this.option.autoBreadcrumbs && typeof this.option.autoBreadcrumbs['console'] === 'undefined') ||
+      this.option.autoBreadcrumbs['console'] === true
+    ) {
       this.addSource(ConsoleSource())
     }
   }

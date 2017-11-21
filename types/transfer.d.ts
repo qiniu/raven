@@ -1,7 +1,8 @@
 import { Store } from './store';
 import { IMessage } from './messages-store';
 import { ISourceMessage } from './source';
-export declare type TransferFunc = (data?: any) => Promise<any>;
+export declare type Callback = (error?: Error, reason?: any) => void;
+export declare type TransferFunc = (data?: any, callback?: Callback) => void;
 export default class Transfer {
     name: string;
     transfer?: TransferFunc;

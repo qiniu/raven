@@ -69,7 +69,17 @@ export default (raven: Raven) => {
         category: 'navigation',
         payload: {
           to: currentHref,
-          from: _lastHref
+          from: _lastHref,
+          pageView: true,
+          pageSize: {
+            width: _document.body.offsetWidth,
+            height: _document.body.offsetHeight
+          },
+          screenSize: {
+            width: _window.screen.width,
+            height: _window.screen.height
+          },
+          userAgent: _navigator.userAgent
         }
       }
 
@@ -95,7 +105,17 @@ export default (raven: Raven) => {
             category: 'navigation',
             payload: {
               to: url,
-              from: _lastHref
+              from: _lastHref,
+              pageView: true,
+              pageSize: {
+                width: _document.body.offsetWidth,
+                height: _document.body.offsetHeight
+              },
+              screenSize: {
+                width: _window.screen.width,
+                height: _window.screen.height
+              },
+              userAgent: _navigator.userAgent
             }
           }
 

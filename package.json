@@ -8,6 +8,9 @@
     "url": "git://github.com/getsentry/raven-js.git"
   },
   "main": "lib/raven.js",
+  "scripts": {
+    "build": "webpack -p ."
+  },
   "devDependencies": {
     "tracekit": "^0.4.5",
     "@types/node": "^8.0.24",

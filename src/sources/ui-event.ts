@@ -2,7 +2,7 @@ import { Raven } from '../raven'
 
 import Source, { ISourceMessage, ActionFunc } from '../source'
 import { fill, htmlTreeAsString } from '../utils'
-import { _document, hasDocument } from '../detection'
+import { _window, _document, hasDocument } from '../detection'
 
 let _keypressTimeout = null
 let _lastCapturedEvent = null
@@ -53,6 +53,11 @@ function domEventHandler(evtName: string, action: ActionFunc<ISourceMessage>) {
       payload.value = evt.target.value
     }
 
+    if (evtName === 'scrollhold') {
+      payload.left = evt.target.scrollLeft
+      payload.top = evt.target.scrollTop
+    }
+
     action({
       category: 'ui.events',
       payload
@@ -95,17 +100,107 @@ function keypressHandler(action: ActionFunc<ISourceMessage>) {
   }
 }
 
+function isVisible(node) {
+  if (node.nodeType == Node.TEXT_NODE) return false
+
+  if (node.nodeType != Node.ELEMENT_NODE) return false
+
+  if (node.offsetHeight === 0 || node.offsetWidth === 0) return false
+  
+  const style = window.getComputedStyle(node)
+
+  return (style.display != 'none' && style.visibility != 'hidden')
+}
+
+function isScrollable(el) {
+  const style = window.getComputedStyle(el)
+  const overflowPattern = /(auto|scroll)/
+
+  return (el.scrollHeight > el.offsetHeight ||
+          el.scrollWidth > el.offsetWidth) &&
+          (style.overflow.match(overflowPattern) ||
+          style.overflowX.match(overflowPattern) ||
+          style.overflowY.match(overflowPattern))
+}
+
+function findScrollableElement(root) {
+  const array = []
+
+  function loop(el) {
+
+    if (!isVisible(el)) return
+  
+    if (isScrollable(el)) {
+      array.push(el)
+    }
+
+    for (let i = 0; i < el.childNodes.length; ++i) {
+      loop(el.childNodes.item(i))
+    }
+  }
+
+  loop(root)
+
+  return array
+}
+
 export default () => {
-  if (!_document || !hasDocument) return
+  if (!_window || !_document || !hasDocument) return
 
   return new Source('breadcrumb.DOMEvents', (action) => {
+
+    
     if (_document.addEventListener) {
       _document.addEventListener('click', domEventHandler('click', action), false)
       _document.addEventListener('keypress', keypressHandler(action), false)
+
+      _window.addEventListener('load', () => {
+        const scrollableElements = findScrollableElement(_document.body)
+  
+        scrollableElements.forEach(scrollableEl => {
+          let timer = null
+  
+          scrollableEl.addEventListener('scroll', evt => {
+            if (timer) {
+              clearTimeout(timer)
+              timer = null
+            } else {
+              domEventHandler('scrollstart', action)(evt)
+            }
+  
+            timer = setTimeout(() => {
+              domEventHandler('scrollhold', action)(evt)
+              timer = null
+            }, 2000)
+          }, false)
+        })
+      })
     } else {
       // IE8 Compatibility
       _document.attachEvent('onclick', domEventHandler('click', action), false)
       _document.attachEvent('onkeypress', keypressHandler(action), false)
+
+      _window.attachEvent('load', () => {
+        const scrollableElements = findScrollableElement(_document.body)
+
+        scrollableElements.forEach(scrollableEl => {
+          let timer = null
+  
+          scrollableEl.attachEvent('scroll', evt => {
+            if (timer) {
+              clearTimeout(timer)
+              timer = null
+            } else {
+              domEventHandler('scrollstart', action)(evt)
+            }
+
+            timer = setTimeout(() => {
+              domEventHandler('scrollhold', action)(evt)
+              timer = null
+            }, 2000)
+          }, false)
+        })
+      })
     }
   })
 }

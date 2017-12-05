@@ -313,10 +313,7 @@ export class Raven {
   captureException(ex: Error, options: any = {}) {
     // If not an Error is passed through, recall as a message instead
     if (!isError(ex)) {
-      return this.captureException(ex, merge({
-        trimHeadFrames: 1,
-        stacktrace: true // if we fall back to captureMessage, default to attempting a new trace
-      }, options))
+      return
     }
 
     // TraceKit.report will re-raise any exception passed to it,

@@ -41,7 +41,7 @@ export function serializeDOMElement(dom: HTMLElement) {
 
   const serialization: IElementSerialization = {
     tag: dom.tagName,
-    class: dom.className !== '' ? dom.className.split(' ').filter(Boolean): null,
+    'class': dom.className !== '' ? dom.className.split(' ').filter(Boolean): null,
     id: dom.id || null,
     data
   }

@@ -26,12 +26,24 @@ module.exports = {
   module: {
     rules: [
       // All files with a '.ts' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.ts?$/, loader: 'awesome-typescript-loader' },
+      { test: /\.ts?$/, loader: 'es3ify-loader!awesome-typescript-loader' },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
-    ]
+    ],
   },
 
-  plugins: []
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        properties: false
+      },
+      mangle: true,
+      beautify: false,
+      output: {
+        quote_keys: true
+      }
+    })
+  ]
 }

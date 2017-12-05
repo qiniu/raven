@@ -126,7 +126,7 @@ export declare class Raven {
      * @example
      * stuff().catch((ex) => raven.captureException(ex))
      */
-    captureException(ex: Error, options?: any): any;
+    captureException(ex: Error, options?: any): this;
     /**
      * Set a user to be sent along with the payload.
      *

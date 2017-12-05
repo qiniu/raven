@@ -12,12 +12,13 @@
     "build": "webpack -p ."
   },
   "devDependencies": {
-    "tracekit": "^0.4.5",
     "@types/node": "^8.0.24",
     "awesome-typescript-loader": "^3.2.3",
     "source-map-loader": "^0.2.1",
+    "tracekit": "^0.4.5",
     "typescript": "^2.4.2",
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "es3ify-loader": "^0.2.0"
   },
   "keywords": [
     "exceptions",

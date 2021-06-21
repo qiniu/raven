@@ -697,15 +697,7 @@ es3ify-loader@^0.2.0:
   dependencies:
     es3ify "0.2.x"
 
-es3ify-webpack-plugin@^0.0.1:
-  version "0.0.1"
-  resolved "http://registry.npm.taobao.org/es3ify-webpack-plugin/download/es3ify-webpack-plugin-0.0.1.tgz#31de8ce4c094bf4426689367f375edf9cca9d174"
-  dependencies:
-    es3ify "^0.2.2"
-    source-map "^0.5.6"
-    webpack-sources "^0.1.2"
-
-es3ify@0.2.x, es3ify@^0.2.2:
+es3ify@0.2.x:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/es3ify/download/es3ify-0.2.2.tgz#5dae3e650e5be3684b88066513d528d092629862"
   dependencies:
@@ -1178,8 +1170,8 @@ is-binary-path@^1.0.0:
     binary-extensions "^1.0.0"
 
 is-buffer@^1.1.5:
-  version "1.1.5"
-  resolved "http://registry.npm.taobao.org/is-buffer/download/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
 
 is-builtin-module@^1.0.0:
   version "1.0.0"
@@ -1364,7 +1356,7 @@ jstransform@~11.0.0:
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
-  resolved "http://registry.npm.taobao.org/kind-of/download/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
   dependencies:
     is-buffer "^1.1.5"
 
@@ -2058,8 +2050,8 @@ set-blocking@^2.0.0, set-blocking@~2.0.0:
   resolved "http://registry.npm.taobao.org/set-blocking/download/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
 
 set-getter@^0.1.0:
-  version "0.1.0"
-  resolved "http://registry.npm.taobao.org/set-getter/download/set-getter-0.1.0.tgz#d769c182c9d5a51f409145f2fba82e5e86e80376"
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/set-getter/-/set-getter-0.1.1.tgz#a3110e1b461d31a9cfc8c5c9ee2e9737ad447102"
   dependencies:
     to-object-path "^0.3.0"
 
@@ -2136,10 +2128,6 @@ sntp@1.x.x:
 source-list-map@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/source-list-map/download/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
-
-source-list-map@~0.1.7:
-  version "0.1.8"
-  resolved "http://registry.npm.taobao.org/source-list-map/download/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
 source-map-loader@^0.2.1:
   version "0.2.1"
@@ -2342,7 +2330,7 @@ to-arraybuffer@^1.0.0:
 
 to-object-path@^0.3.0:
   version "0.3.0"
-  resolved "http://registry.npm.taobao.org/to-object-path/download/to-object-path-0.3.0.tgz#297588b7b0e7e0ac08e04e672f85c1f4999e17af"
+  resolved "https://registry.yarnpkg.com/to-object-path/-/to-object-path-0.3.0.tgz#297588b7b0e7e0ac08e04e672f85c1f4999e17af"
   dependencies:
     kind-of "^3.0.2"
 
@@ -2499,13 +2487,6 @@ watchpack@^1.4.0:
     async "^2.1.2"
     chokidar "^1.7.0"
     graceful-fs "^4.1.2"
-
-webpack-sources@^0.1.2:
-  version "0.1.5"
-  resolved "http://registry.npm.taobao.org/webpack-sources/download/webpack-sources-0.1.5.tgz#aa1f3abf0f0d74db7111c40e500b84f966640750"
-  dependencies:
-    source-list-map "~0.1.7"
-    source-map "~0.5.3"
 
 webpack-sources@^1.0.1:
   version "1.0.1"
